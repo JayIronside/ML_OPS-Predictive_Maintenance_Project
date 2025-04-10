@@ -15,5 +15,5 @@ def training_pipeline(data_path: str):
     config = ModelNameConfig(model_name="xgboost")
 
     model = train_model(X_train, X_test, y_train, y_test, config=config)
-    classification_report, confusion_matrix = evaluate_model(model, X_test, y_test)
-    return classification_report, confusion_matrix
+    classification_report, confusion_matrix, accuracy = evaluate_model(model, X_test, y_test)
+    return classification_report, confusion_matrix, accuracy

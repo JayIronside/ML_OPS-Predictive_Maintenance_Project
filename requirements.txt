@@ -9,4 +9,4 @@ pydantic
 pandas
 scikit-learn
 imbalanced-learn
-mlflow
+mlflow==2.20.4

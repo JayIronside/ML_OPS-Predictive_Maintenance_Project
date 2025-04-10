@@ -25,9 +25,14 @@ class ClassificationEvaluation(Evaluation):
             logging.info("Confusion Matrix:")
             logging.info(conf_matrix)
 
+            # Log accuracy
+            accuracy = accuracy_score(y_true, y_pred)
+            logging.info(f"Accuracy: {accuracy}")
+
             return {
                 "classification_report": report,
-                "confusion_matrix": conf_matrix
+                "confusion_matrix": conf_matrix,
+                "accuracy": accuracy
             }
         except Exception as e:
             logging.error(f"Error calculating metrics: {e}")
