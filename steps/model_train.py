@@ -15,14 +15,13 @@ from zenml.client import Client
 
 
 
-
 # Create the config object with the appropriate save directory
 config = ModelNameConfig(model_name="xgboost", save_dir="../saved_model")
 
 
 experiment_tracker = Client().active_stack.experiment_tracker
 
-@step(experiment_tracker=experiment_tracker.name)
+@step(enable_cache=False, experiment_tracker=experiment_tracker.name)
 def train_model(
     X_train: np.ndarray,
     X_test: np.ndarray,
@@ -34,7 +33,7 @@ def train_model(
         model_name = config.model_name.lower()  # Normalize model name to lowercase
 
         if model_name == "xgboost":
-            mlflow.sklearn.autolog()  # Enable autologging for XGBoost
+            mlflow.xgboost.autolog()
             # Ensure all data is numeric before training
             if not np.issubdtype(X_train.dtype, np.number):
                 raise ValueError("X_train contains non-numeric values. Ensure proper preprocessing.")
